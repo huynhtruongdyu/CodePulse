@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { CategoryService } from '../services/category-service';
 
 @Component({
   selector: 'app-category-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './category-list.html',
   styleUrl: './category-list.css',
 })
 export class CategoryList {
+  private readonly _categoryService = inject(CategoryService);
+  private readonly getAllCategoriesRef = this._categoryService.getAllCategories();
 
+  isLoading = this.getAllCategoriesRef.isLoading;
+  isError = this.getAllCategoriesRef.error;
+  categories = this.getAllCategoriesRef.value;
+
+  onDelete(id: string) {
+    alert("Delete");
+  }
+
+  onEdit(id: string){
+    alert("Edit")
+  }
 }

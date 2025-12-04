@@ -1,1 +1,42 @@
-<p>category-list works!</p>
+<div class="mx-auto w-5xl py-3">
+  <h1 class="text-2xl font-bold">Categories</h1>
+  <div class="flex justify-end content-center">
+    <a [routerLink]="['/admin', 'categories', 'add']"
+      ><button class="btn btn-primary">New</button></a
+    >
+  </div>
+  @if(isLoading()){
+  <p>Loading...</p>
+  } @else if (isError()) {
+  <p class="text-red-500">There has been an error</p>
+  } @else {
+  <div class="overflow-x-auto mt-3">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>URL Handle</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of categories(); track $index) {
+        <tr>
+          <th>{{ $index + 1 }}</th>
+          <td>{{ item.name }}</td>
+          <td>{{ item.urlHandle }}</td>
+          <td>
+            <div class="flex gap-1 justify-start content-center">
+              <button class="btn btn-xs btn-outline" (click)="onEdit(item.id)">Edit</button>
+              <button class="btn btn-xs btn-error" (click)="onDelete(item.id)">Delete</button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
+</div>

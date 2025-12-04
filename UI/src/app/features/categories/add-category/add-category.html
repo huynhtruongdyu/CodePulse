@@ -1,0 +1,51 @@
+<div class="w-5xl mx-auto py-3">
+  <a
+    [routerLink]="['/admin', 'categories']"
+    class="link link-hover inline-flex gap-2 justify-center content-center"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+      />
+    </svg>
+
+    Back to list</a
+  >
+  <h1 class="text-2xl font-bold mt-3">Add Category</h1>
+  <form (submit)="onSubmit($event)">
+    <div class="mt-3">
+      <div class="mt-3 flex gap-1 flex-col">
+        <label class="input">
+          <input type="text" placeholder="Name" [field]="newCategoryForm.name" />
+        </label>
+        @if (newCategoryForm.name().touched() && newCategoryForm.name().invalid()) {
+        <small class="text-red-500"> {{ newCategoryForm.name().errors()[0].message }} </small>
+        }
+      </div>
+
+      <div class="mt-3 flex gap-1 flex-col">
+        <label class="input">
+          <input type="text" placeholder="URL Handle (slug)" [field]="newCategoryForm.urlHandle" />
+        </label>
+        @if (newCategoryForm.urlHandle().touched() && newCategoryForm.urlHandle().invalid()) {
+        <small class="text-red-500"> {{ newCategoryForm.urlHandle().errors()[0].message }} </small>
+        }
+      </div>
+
+      <div class="mt-3">
+        <button type="submit" class="btn btn-primary" [disabled]="newCategoryForm().invalid()">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
