@@ -17,10 +17,16 @@ export class CategoryList {
   categories = this.getAllCategoriesRef.value;
 
   onDelete(id: string) {
-    alert("Delete");
+    if (!id) return;
+    this._categoryService.deleteCategory(id).subscribe({
+      next: () => {
+        this.getAllCategoriesRef.reload();
+      },
+      error: () => {},
+    });
   }
 
-  onEdit(id: string){
-    alert("Edit")
+  onEdit(id: string) {
+    alert('Edit');
   }
 }

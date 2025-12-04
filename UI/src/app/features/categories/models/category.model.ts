@@ -3,6 +3,8 @@ export interface AddCategoryRequest {
   urlHandle: string;
 }
 
+export interface EditCategoryRequest extends Category {}
+
 export interface Category {
   id: string;
   name: string;

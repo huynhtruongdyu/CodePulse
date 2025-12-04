@@ -24,7 +24,8 @@ namespace CodePulse.API.Controllers
         {
             var category = await categoryRepository.GetByIdAsync(id);
             if (category == null) return NotFound();
-            return Ok(category);
+            var response = new CategoryDto(category);
+            return Ok(response);
         }
 
         [HttpPost]
@@ -41,6 +42,18 @@ namespace CodePulse.API.Controllers
         {
             await categoryRepository.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpPut]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> UpdateCategory([FromRoute] Guid id, [FromBody]  CategoryDto category)
+        {
+            var cat = await categoryRepository.GetByIdAsync(id);
+            if (cat == null) return NotFound();
+            cat.Name = category.Name;
+            cat.UrlHandle = category.UrlHandle;
+            await categoryRepository.UpdateAsync(cat);
+            return Ok();
         }
     }
 }

@@ -6,7 +6,6 @@
     >
   </div>
   @if(isLoading()){
-  <p>Loading...</p>
   } @else if (isError()) {
   <p class="text-red-500">There has been an error</p>
   } @else {
@@ -29,7 +28,12 @@
           <td>{{ item.urlHandle }}</td>
           <td>
             <div class="flex gap-1 justify-start content-center">
-              <button class="btn btn-xs btn-outline" (click)="onEdit(item.id)">Edit</button>
+              <button
+                class="btn btn-xs btn-outline"
+                [routerLink]="['/admin/categories/edit', item.id]"
+              >
+                Edit
+              </button>
               <button class="btn btn-xs btn-error" (click)="onDelete(item.id)">Delete</button>
             </div>
           </td>

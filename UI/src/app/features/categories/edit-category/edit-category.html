@@ -20,33 +20,42 @@
 
     Back to list</a
   >
-  <h1 class="text-2xl font-bold mt-3">Add Category</h1>
+  <h1 class="text-2xl font-bold mt-3">Edit Category</h1>
+
+  @if(isCategoryLoaded()){
+
   <form (submit)="onSubmit($event)">
     <div class="mt-3">
       <div class="mt-3 flex gap-1 flex-col">
         <label class="input">
-          <input type="text" placeholder="Name" [field]="newCategoryForm.name" />
+          <input type="text" placeholder="Id" [disabled]="true" [value]="id()" />
         </label>
-        @if (newCategoryForm.name().touched() && newCategoryForm.name().invalid()) {
-        <small class="text-red-500"> {{ newCategoryForm.name().errors()[0].message }} </small>
+      </div>
+      <div class="mt-3 flex gap-1 flex-col">
+        <label class="input">
+          <input type="text" placeholder="Name" [field]="editCategoryForm.name" />
+        </label>
+        @if (editCategoryForm.name().touched() && editCategoryForm.name().invalid()) {
+        <small class="text-red-500"> {{ editCategoryForm.name().errors()[0].message }} </small>
         }
       </div>
 
       <div class="mt-3 flex gap-1 flex-col">
         <label class="input">
-          <input type="text" placeholder="URL Handle (slug)" [field]="newCategoryForm.urlHandle" />
+          <input type="text" placeholder="URL Handle (slug)" [field]="editCategoryForm.urlHandle" />
         </label>
-        @if (newCategoryForm.urlHandle().touched() && newCategoryForm.urlHandle().invalid()) {
-        <small class="text-red-500"> {{ newCategoryForm.urlHandle().errors()[0].message }} </small>
+        @if (editCategoryForm.urlHandle().touched() && editCategoryForm.urlHandle().invalid()) {
+        <small class="text-red-500"> {{ editCategoryForm.urlHandle().errors()[0].message }} </small>
         }
       </div>
 
       <div class="mt-3 flex gap-3">
-        <button type="submit" class="btn btn-primary" [disabled]="newCategoryForm().invalid()">
+        <button type="submit" class="btn btn-primary" [disabled]="editCategoryForm().invalid()">
           Submit
         </button>
         <button class="btn" [routerLink]="['/admin/categories']">Cancel</button>
       </div>
     </div>
   </form>
+  }
 </div>
