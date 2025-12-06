@@ -1,6 +1,6 @@
 import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable, InputSignal, signal } from '@angular/core';
-import { AddCategoryRequest, Category, EditCategoryRequest } from '../models/category.model';
+import { AddCategoryRequest, Category, EditCategoryRequest } from '../_models/category.model';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 

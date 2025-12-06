@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CodePulse.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     [ApiController]
     public class CategoriesController(ICategoryRepository categoryRepository) : ControllerBase
     {

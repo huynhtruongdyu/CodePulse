@@ -1,0 +1,159 @@
+<div class="w-5xl mx-auto py-3">
+  <button
+    class="link link-hover inline-flex gap-2 justify-center content-center"
+    (click)="onBack()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+      />
+    </svg>
+
+    Back to list
+  </button>
+  <h1 class="text-2xl font-bold mt-3">
+    @if (formType()=='edit'){ Edit Blog Post } @else { Add new Blog Post }
+  </h1>
+  @if(!isLoading()) {
+  <form (submit)="onSubmit($event)">
+    <div class="mt-5">
+      <!-- Title -->
+      <div class="mt-5 flex gap-1 flex-col">
+        <label class="floating-label">
+          <span>Title</span>
+          <input
+            type="text"
+            placeholder="Title"
+            class="input input-md"
+            [field]="upsertBlogPostForm.title"
+          />
+        </label>
+        @if (upsertBlogPostForm.title().touched() && upsertBlogPostForm.title().invalid()) {
+        <small class="text-red-500"> {{ upsertBlogPostForm.title().errors()[0].message }} </small>
+        }
+      </div>
+
+      <!-- Short Description -->
+      <div class="mt-5 flex gap-1 flex-col">
+        <label class="floating-label">
+          <span>Short Description</span>
+          <textarea
+            class="textarea"
+            placeholder="Short Description"
+            [field]="upsertBlogPostForm.shortDescription"
+          ></textarea>
+        </label>
+        <small class="text-gray-500">{{ shortDescriptionLenght() }} characters</small>
+        @if (upsertBlogPostForm.shortDescription().touched() &&
+        upsertBlogPostForm.shortDescription().invalid()) {
+        <small class="text-red-500">
+          {{ upsertBlogPostForm.shortDescription().errors()[0].message }}
+        </small>
+        }
+      </div>
+
+      <!-- Content -->
+      <div class="mt-5 flex gap-1 flex-col">
+        <label class="floating-label">
+          <span>Content</span>
+          <textarea
+            class="textarea"
+            placeholder="Content"
+            [field]="upsertBlogPostForm.content"
+          ></textarea>
+        </label>
+        @if (upsertBlogPostForm.content().touched() && upsertBlogPostForm.content().invalid()) {
+        <small class="text-red-500">
+          {{ upsertBlogPostForm.content().errors()[0].message }}
+        </small>
+        }
+      </div>
+
+      <!-- Feature Image Url -->
+      <div class="mt-5 flex gap-1 flex-col">
+        <label class="floating-label input">
+          <span>Feature Image Url</span>
+          <input
+            [field]="upsertBlogPostForm.featureImageUrl"
+            type="url"
+            placeholder="Feature Image Url"
+          />
+        </label>
+        @if (upsertBlogPostForm.featureImageUrl().touched() &&
+        upsertBlogPostForm.featureImageUrl().invalid()) {
+        <small class="text-red-500">
+          {{ upsertBlogPostForm.featureImageUrl().errors()[0].message }}
+        </small>
+        }
+      </div>
+
+      <!-- Url Handle -->
+      <div class="mt-5 flex gap-1 flex-col">
+        <label class="floating-label">
+          <span>URL Handle</span>
+          <input
+            type="url"
+            placeholder="URL Handle"
+            class="input input-md"
+            [field]="upsertBlogPostForm.urlHandle"
+          />
+        </label>
+        @if (upsertBlogPostForm.urlHandle().touched() && upsertBlogPostForm.urlHandle().invalid()) {
+        <small class="text-red-500">
+          {{ upsertBlogPostForm.urlHandle().errors()[0].message }}
+        </small>
+        }
+      </div>
+
+      <!-- Published Date -->
+      <div class="mt-5 flex gap-1 flex-col">
+        <label class="input">
+          <span class="label">Published date</span>
+          <input type="date" [field]="upsertBlogPostForm.publishedDate" />
+        </label>
+      </div>
+
+      <!-- Author -->
+      <div class="mt-5 flex gap-1 flex-col">
+        <label class="floating-label">
+          <span>Author</span>
+          <input
+            type="text"
+            placeholder="Author"
+            class="input input-md"
+            [field]="upsertBlogPostForm.author"
+          />
+        </label>
+        @if (upsertBlogPostForm.author().touched() && upsertBlogPostForm.author().invalid()) {
+        <small class="text-red-500"> {{ upsertBlogPostForm.author().errors()[0].message }} </small>
+        }
+      </div>
+
+      <!-- Is Visible -->
+      <div class="mt-5">
+        <label class="label">
+          <input type="checkbox" class="checkbox" [field]="upsertBlogPostForm.isVisible" />
+          Is Visible?
+        </label>
+      </div>
+
+      <!-- Buttons -->
+      <div class="mt-5 flex gap-3">
+        <button type="submit" class="btn btn-primary" [disabled]="upsertBlogPostForm().invalid()">
+          Submit
+        </button>
+        <button class="btn" (click)="onBack()">Cancel</button>
+      </div>
+    </div>
+  </form>
+  }
+</div>

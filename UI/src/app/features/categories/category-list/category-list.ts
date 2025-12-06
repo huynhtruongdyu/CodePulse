@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CategoryService } from '../services/category-service';
+import { CategoryService } from '../_services/category-service';
 
 @Component({
   selector: 'app-category-list',

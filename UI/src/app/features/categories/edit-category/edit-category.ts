@@ -1,8 +1,8 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { Category, EditCategoryRequest } from '../models/category.model';
+import { Category, EditCategoryRequest } from '../_models/category.model';
 import { form, required, Field, disabled } from '@angular/forms/signals';
-import { CategoryService } from '../services/category-service';
+import { CategoryService } from '../_services/category-service';
 import { HttpResourceRef } from '@angular/common/http';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { form, Field, required, minLength } from '@angular/forms/signals';
-import { CategoryService } from '../services/category-service';
-import { AddCategoryRequest } from '../models/category.model';
+import { CategoryService } from '../_services/category-service';
+import { AddCategoryRequest } from '../_models/category.model';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -41,8 +41,7 @@ export class AddCategory {
   onSubmit(event: Event) {
     event.preventDefault();
     if (!this.newCategoryForm().invalid()) {
-      const newCat = this.categoryModel();
-      this._categoryService.addCategory(newCat);
+      this._categoryService.addCategory(this.categoryModel());
     }
   }
 }

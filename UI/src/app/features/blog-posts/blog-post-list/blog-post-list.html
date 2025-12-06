@@ -1,0 +1,49 @@
+<div class="mx-auto w-5xl py-3">
+  <h1 class="text-2xl font-bold">Blog Posts</h1>
+  <div class="flex justify-end content-center">
+    <a [routerLink]="['/admin', 'blog-posts', 'upsert']"
+      ><button class="btn btn-primary">New</button></a
+    >
+  </div>
+  @if(error()) {
+  <p class="text-red-500">There has been an error</p>
+  } @else {
+  <div class="overflow-x-auto mt-3">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Short Description</th>
+          <th>Published</th>
+          <th>Visible</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of blogPosts(); track $index) {
+        <tr>
+          <th>{{ $index + 1 }}</th>
+          <td>{{ item.title }}</td>
+          <td>{{ item.shortDescription }}</td>
+          <td>{{ item.publishedDate | date : 'MM/dd/yyyy' }}</td>
+          <td><input type="checkbox" disabled class="checkbox" [checked]="item.isVisible" /></td>
+          <td>
+            <div class="flex gap-1 justify-start content-center">
+              <button
+                class="btn btn-xs btn-outline"
+                [routerLink]="['/admin/blog-posts/upsert', item.id]"
+              >
+                Edit
+              </button>
+              <button class="btn btn-xs btn-error" (click)="onDelete(item.id)">Delete</button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
+</div>
